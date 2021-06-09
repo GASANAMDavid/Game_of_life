@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'rubocop'
 gem 'rake'
+gem 'rspec', '~>3.10'
+gem 'rubocop'
