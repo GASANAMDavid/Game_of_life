@@ -1,0 +1,4 @@
+AllCops:
+  NewCops: enable
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
