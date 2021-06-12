@@ -1,7 +1,12 @@
-class CountNeighbours
-  def of(game_state, cell_position)
+class CountAliveNeighbours
+  attr_reader :directions
+
+  def initialize
+    @directions = { west: { row: 0, col: 1 }}
+  end
+
+  def of_a_cell_at(game_state, cell_position)
     count = 0
-    directions = { west: { row: 0, col: 1 }, east: { row: 0, col: -1 }, south_east: { row: 1, col: -1 } }
     directions.each do |_, direction|
       new_row = cell_position[:row] + direction[:row]
       new_col = cell_position[:col] + direction[:col]
