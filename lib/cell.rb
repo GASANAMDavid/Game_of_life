@@ -1,16 +1,22 @@
 class Cell
-  attr_accessor :cell_state
+  attr_accessor :state
 
   def initialize(initial_cell_state)
-    @cell_state = initial_cell_state
+    @state = initial_cell_state
+  end
+
+  def alive?
+    return true if state == 'Alive'
+
+    false
   end
 
   def next_generation_cell_state(neighbours)
-    case cell_state
+    case state
     when 'Alive'
-      @cell_state = 'Dead' unless [2, 3].include?(neighbours)
+      @state = 'Dead' unless [2, 3].include?(neighbours)
     when 'Dead'
-      @cell_state = 'Alive' if neighbours == 3
+      @state = 'Alive' if neighbours == 3
     end
   end
 end

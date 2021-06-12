@@ -4,11 +4,21 @@ RSpec.describe Cell do
   let(:alive_cell) { Cell.new('Alive') }
 
   describe '#next_generation_cell_state' do
+    context '#alive?' do
+      it 'returns true if cell is alive' do
+        expect(alive_cell).to be_alive
+      end
+
+      it 'returns false if cell is dead' do
+        expect(dead_cell).not_to be_alive
+      end
+    end
+
     context 'Any live cell with fewer than two live neighbours' do
       it 'dies, as if by underpopulation' do
         neighbours = 1
         alive_cell.next_generation_cell_state(neighbours)
-        expect(alive_cell.cell_state).to eq('Dead')
+        expect(alive_cell).not_to be_alive
       end
     end
 
@@ -16,7 +26,7 @@ RSpec.describe Cell do
       it 'lives on to the next generation' do
         neighbours = 2
         alive_cell.next_generation_cell_state(neighbours)
-        expect(alive_cell.cell_state).to eq('Alive')
+        expect(alive_cell.alive?).to eq(true)
       end
     end
 
@@ -24,7 +34,7 @@ RSpec.describe Cell do
       it 'dies, as if by overpopulation' do
         neighbours = 4
         alive_cell.next_generation_cell_state(neighbours)
-        expect(alive_cell.cell_state).to eq('Dead')
+        expect(alive_cell.alive?).to eq(false)
       end
     end
 
@@ -32,14 +42,7 @@ RSpec.describe Cell do
       it 'becomes a live cell, as if by reproduction' do
         neighbours = 3
         dead_cell.next_generation_cell_state(neighbours)
-        expect(dead_cell.cell_state).to eq('Alive')
-      end
-
-      it 'remains dead if neighbours are less or greater than 3' do
-        [2, 4].each do |neighbours|
-          dead_cell.next_generation_cell_state(neighbours)
-          expect(dead_cell.cell_state).to eq('Dead')
-        end
+        expect(dead_cell.alive?).to eq(true)
       end
     end
   end

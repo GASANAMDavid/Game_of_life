@@ -4,35 +4,40 @@ require_relative '../lib/game_engine'
 RSpec.describe GameEngine do
   let(:dead_cell) { Cell.new('Dead') }
   let(:alive_cell) { Cell.new('Alive') }
-  let(:initial_state) { [alive_cell] }
-  let(:game) { GameEngine.new(initial_state) }
+  let(:initial_state) { [[alive_cell]] }
+  let(:count_neighbours) { double('FindNeighbours') }
+  let(:game) { GameEngine.new(initial_state, count_neighbours) }
+
   it 'creates the game with initial state' do
     expect(game.state).to eq initial_state
   end
 
   context '#next_generation' do
-    it 'finds next generation of an isolated cell' do
-      expect(game).to receive(:find_alive_neigbouring_cells).and_return(1)
+    xit 'finds next generation of an isolated cell' do
+      cell_position = { row: 0, col: 0 }
+      allow(count_neighbours).to receive(:of).with(game.state, cell_position).and_return(0)
       game.next_generation
-      expect(game.state[0].cell_state).to eq('Dead')
+      expect(game.state[0][0].alive?).to eq false
     end
-
-    # it 'finds next generation of an isolated cell' do
-    #   expect(game).to receive(:find_neighnbours_alive_neigbouring_cells).and_return(1)
-    #   game.next_generation
-    #   expect(game.state[0].cell_state).to eq('Dead')
-    # end
   end
+  context 'neighbouring cells' do
+    let(:initial_state) { [[alive_cell, dead_cell], [alive_cell, dead_cell]] }
+    # before do
+    #   puts game.state.to_s
+    #   [
+    #     { row: 0, col: 0 },
+    #     { row: 0, col: 1 }
+    #   ].each do |cell_position|
+    #     allow(count_neighbours).to receive(:of).with(game.state, cell_position).and_return(1).twice
+    #   end
+    # end
 
-  context 'find_alive_neigbouring_cells' do
-    let(:initial_state) { [[alive_cell], [alive_cell]] }
-    it 'finds alive cell at the north of the current cell' do
-      expect(game.find_alive_neigbouring_cells({ row: 1, col: 0 })).to eq 1
-    end
+    it 'finds next generation of an two neighbouring cells' do
+      allow(count_neighbours).to receive(:of).and_return(1)
 
-    it 'finds alive cell at north-east of the current cell' do
-      initial_state = [[1, 0], [1, 0]]
-      expect(game.find_alive_neigbouring_cells({ row: 1, col: 1 })).to eq 2
+      game.next_generation
+      expect(game.state[0][0].alive?).to eq false
+      expect(game.state[1][0].alive?).to eq false
     end
   end
 end
