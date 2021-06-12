@@ -11,7 +11,7 @@ class Cell
     false
   end
 
-  def next_generation_cell_state(neighbours)
+  def next_generation_state(neighbours)
     case state
     when 'Alive'
       @state = 'Dead' unless [2, 3].include?(neighbours)

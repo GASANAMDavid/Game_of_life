@@ -17,7 +17,7 @@ RSpec.describe Cell do
     context 'Any live cell with fewer than two live neighbours' do
       it 'dies, as if by underpopulation' do
         neighbours = 1
-        alive_cell.next_generation_cell_state(neighbours)
+        alive_cell.next_generation_state(neighbours)
         expect(alive_cell).not_to be_alive
       end
     end
@@ -25,7 +25,7 @@ RSpec.describe Cell do
     context 'Any live cell with two or three live neighbours' do
       it 'lives on to the next generation' do
         neighbours = 2
-        alive_cell.next_generation_cell_state(neighbours)
+        alive_cell.next_generation_state(neighbours)
         expect(alive_cell.alive?).to eq(true)
       end
     end
@@ -33,7 +33,7 @@ RSpec.describe Cell do
     context 'Any live cell with more than three live neighbours' do
       it 'dies, as if by overpopulation' do
         neighbours = 4
-        alive_cell.next_generation_cell_state(neighbours)
+        alive_cell.next_generation_state(neighbours)
         expect(alive_cell.alive?).to eq(false)
       end
     end
@@ -41,7 +41,7 @@ RSpec.describe Cell do
     context 'Any dead cell with exactly three live neighbours' do
       it 'becomes a live cell, as if by reproduction' do
         neighbours = 3
-        dead_cell.next_generation_cell_state(neighbours)
+        dead_cell.next_generation_state(neighbours)
         expect(dead_cell.alive?).to eq(true)
       end
     end

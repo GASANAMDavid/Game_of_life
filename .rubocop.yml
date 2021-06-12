@@ -1,4 +1,4 @@
 AllCops:
   NewCops: enable
-Lint/ConstantDefinitionInBlock:
-  Enabled: false
+# Lint/ConstantDefinitionInBlock:
+#   Enabled: false
