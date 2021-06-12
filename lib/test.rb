@@ -11,8 +11,14 @@ def count_neighbours_of_a_cell(array)
   all_neighbours
 end
 
-def find_neighnbours(aaaa)
+def find_neighnbours(array, row, col)
   count = 0
+
+  # (row - 1...row + 1).each do |i|
+  #   (col - 1...col + 1).each do |j|
+  #     count += 1 if array[i][j] == true
+  #   end
+  # end
   possible_neighbours_positions = [[-1, -1], [-1, 0], [-1, 1], [0, -1],
                                    [0, 1], [1, 0], [1, 1], [1, -1]]
 

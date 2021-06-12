@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Cell class depicts a real cell in space
 class Cell
-  attr_accessor :state
+  attr_reader :state
 
   def initialize(initial_cell_state)
     @state = initial_cell_state
