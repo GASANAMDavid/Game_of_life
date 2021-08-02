@@ -8,29 +8,16 @@ class Cell
   def alive?
     @state == :alive
   end
+end
 
+class AliveCell < Cell
   def next_generation_state(neighbours)
-    stategy = {
-      alive: AliveStrategy.new,
-      dead: DeadStrategy.new
-    }[@state]
-
-    @state = stategy.execute(neighbours)
+    @state = :Dead unless [2, 3].include?(neighbours)
   end
 end
 
-class AliveStrategy
-  def execute(neighbors)
-    return :dead if neighbors < 2 || neighbors > 3
-
-    :alive
-  end
-end
-
-class DeadStrategy
-  def execute(neighbors)
-    return :alive if neighbors == 3
-
-    :dead
+class DeadCell < Cell
+  def next_generation_state(neighbours)
+    @state = :alive if neighbours == 3
   end
 end

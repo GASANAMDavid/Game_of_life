@@ -2,8 +2,8 @@ require_relative '../lib/game_of_life'
 require_relative '../lib/cell'
 
 describe GameOfLife do
-  let(:dead_cell) { Cell.new(:dead) }
-  let(:living_cell) { Cell.new(:alive) }
+  let(:dead_cell) { DeadCell.new(:dead) }
+  let(:living_cell) { AliveCell.new(:alive) }
   let(:initial_state) do
     [[living_cell, dead_cell, living_cell],
      [living_cell, dead_cell, dead_cell],

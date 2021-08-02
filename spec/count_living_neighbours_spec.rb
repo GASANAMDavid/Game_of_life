@@ -1,8 +1,8 @@
 require_relative '../lib/count_living_neighbours'
 require_relative '../lib/cell'
 describe CountLivingNeighbours do
-  let(:living_cell) { Cell.new(:alive) }
-  let(:dead_cell) { Cell.new(:dead) }
+  let(:living_cell) { AliveCell.new(:alive) }
+  let(:dead_cell) { DeadCell.new(:dead) }
   let(:game_state) do
     [[living_cell, dead_cell, living_cell],
      [living_cell, dead_cell, dead_cell],
